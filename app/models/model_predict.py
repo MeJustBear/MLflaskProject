@@ -36,7 +36,7 @@ def predict_by_url(modelE, vgm_url, tokenizer, encoder):
     linesSeq = np.resize(linesSeq, (c, int(maxlen)))
 
     layers = modelE.predict(linesSeq)
-    layers = np.reshape(layers[1:], (c, nClasses))
+    layers = np.reshape(layers, (c, nClasses))
     layers = np.sum(layers, axis=0) / float(c)
 
     probabilities = []
