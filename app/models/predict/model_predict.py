@@ -2,12 +2,14 @@ import itertools
 import requests
 from bs4 import BeautifulSoup
 
+from app.models.predict import modelE, tokenizer, encoder
+
 import numpy as np
 
 
-def predict_by_url(model, vgm_url, tokenizer, encoder):
+def predict_by_url(vgm_url, model=modelE, tokenizer=tokenizer, encoder=encoder):
     html_text = requests.get(vgm_url).text
-    print(html_text)
+
     soup = BeautifulSoup(html_text, 'html.parser')
 
     page_head = soup.find("h1", {"class": "article__heading"})
@@ -26,9 +28,9 @@ def predict_by_url(model, vgm_url, tokenizer, encoder):
     probabilities = [[], []]
     for i in range(len(layers)):
         probabilities[0].append(encoder.classes_[i])
-        probabilities[1].append("".join(np.clip(np.round(layers[i] * 100.0, 4), 0, 100)).join("%"))
+        probabilities[1].append(np.clip(np.round(layers[i] * 100.0), 0, 100))
 
-    return probabilities
+    return dict(zip(probabilities[0], probabilities[1]))
 
 def predict_text(lines, tokenizer,model):
     linesSeq = np.array(tokenizer.texts_to_sequences(lines))
