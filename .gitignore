@@ -12,8 +12,10 @@
 
 # Virtualenvs
 env/
-dev.db
 .cache/v/cache
 
 # Intellij IDEA based IDEs folder
 .idea/**
+
+#Unused files
+app/*.py

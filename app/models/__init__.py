@@ -1,22 +1,23 @@
-import os.path as os_path
-import wget
-import gzip
-import sys
-import shutil
-import json
-
-import pandas as pd
-import numpy as np
-
-from tensorflow.keras.models import load_model
-from tensorflow.keras.preprocessing.text import tokenizer_from_json
-
-from sklearn.preprocessing import LabelEncoder
-
-import config
-
-
-# create this bar_progress method which is invoked automatically from wget
+""" Models Init """
+# import os.path as os_path
+# import wget
+# import gzip
+# import sys
+# import shutil
+# import json
+#
+# import pandas as pd
+# import numpy as np
+#
+# from tensorflow.keras.models import load_model
+# from tensorflow.keras.preprocessing.text import tokenizer_from_json
+#
+# from sklearn.preprocessing import LabelEncoder
+#
+# import config
+#
+#
+# # create this bar_progress method which is invoked automatically from wget
 # def bar_progress(current, total):
 #   progress_message = "Downloading: %d%% [%d / %d] bytes" % (current / total * 100, current, total)
 #   sys.stdout.write("\r" + progress_message)
@@ -34,12 +35,11 @@ import config
 #
 # csv_data = pd.read_csv(dest_file[:-3], delimiter=',')
 # print(csv_data.head())
-
-modelE = load_model(config.PathsConfig.path_to_model + config.PathsConfig.model_name)
-with open(config.PathsConfig.path_to_model + config.PathsConfig.tokenizer_name) as f:
-    data = json.load(f)
-    tokenizer = tokenizer_from_json(data)
-encoder = LabelEncoder()
-encoder.classes_ = np.load(config.PathsConfig.path_to_model + config.PathsConfig.encoder_name)
-
+#
+# modelE = load_model(config.PathsConfig.path_to_model + config.PathsConfig.model_name)
+# with open(config.PathsConfig.path_to_model + config.PathsConfig.tokenizer_name) as f:
+#     data = json.load(f)
+#     tokenizer = tokenizer_from_json(data)
+# encoder = LabelEncoder()
+# encoder.classes_ = np.load(config.PathsConfig.path_to_model + config.PathsConfig.encoder_name)
 
