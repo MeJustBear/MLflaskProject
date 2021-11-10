@@ -16,7 +16,7 @@ def classify_url():  # put application's code here
 @application.route('/predictByText', methods=['POST'])
 def classify_text():  # put application's code here
     data = request.form
-    values = mp.predict_text(data['analyseURL'])
+    values = mp.predict_text(data['analyseTEXT'])
     return jsonify(values)
 
 
