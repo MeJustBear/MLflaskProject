@@ -6,7 +6,7 @@ import shutil
 
 import pandas as pd
 
-import config
+from app import config
 
 
 # create this bar_progress method which is invoked automatically from wget

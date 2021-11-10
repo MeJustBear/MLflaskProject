@@ -32,7 +32,7 @@ def predict_by_url(vgm_url, model=modelE, tokenizer=tokenizer, encoder=encoder):
 
     return dict(zip(probabilities[0], probabilities[1]))
 
-def predict_text(lines, tokenizer,model):
+def predict_text(lines, model=modelE, tokenizer=tokenizer):
     linesSeq = np.array(tokenizer.texts_to_sequences(lines))
     linesSeq = np.array(list(itertools.chain.from_iterable(linesSeq)))
 

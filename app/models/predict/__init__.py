@@ -8,7 +8,7 @@ from tensorflow.keras.preprocessing.text import tokenizer_from_json
 
 from sklearn.preprocessing import LabelEncoder
 
-import config
+from app import config
 
 modelE = load_model(config.PathsConfig.path_to_model + config.PathsConfig.model_name)
 with open(config.PathsConfig.path_to_model + config.PathsConfig.tokenizer_name) as f:

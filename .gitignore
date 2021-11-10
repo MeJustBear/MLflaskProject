@@ -1,7 +1,6 @@
 # Default ignored files
 /shelf/
 /.idea/workspace.xml
-/static/**
 
 # Editor-based HTTP Client requests
 /httpRequests/
@@ -19,3 +18,8 @@ env/
 
 #Unused files
 app/*.py
+
+requirements1.txt
+
+run.py
+/app/views.py
