@@ -20,5 +20,6 @@ env/
 #Unused files
 requirements1.txt
 
-run.py
-/app/views.py
+!/run.py
+!/.idea/
+!/app/views.py
