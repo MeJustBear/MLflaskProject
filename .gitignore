@@ -1,7 +1,8 @@
 # Default ignored files
 /shelf/
 /.idea/workspace.xml
-/static/predict/**
+/static/predict/model/**
+/static/predict/**.json
 /static/train/**
 # Editor-based HTTP Client requests
 /httpRequests/
