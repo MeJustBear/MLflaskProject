@@ -1,3 +1,2 @@
 """Application Init """
-
-# from . import views
+import app

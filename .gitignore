@@ -1,11 +1,13 @@
 # Default ignored files
 /shelf/
 /.idea/workspace.xml
-/static/predict/model/variables/**.data**
-/static/predict/**.json
+/static/predict/model/variables/variables.data-00000-of-00001
+/static/predict/tokenizer.json
 /static/train/**
 # Editor-based HTTP Client requests
 /httpRequests/
+
+/.git
 
 # Datasource local storage ignored files
 /dataSources/

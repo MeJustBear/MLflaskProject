@@ -4,7 +4,7 @@ import config
 application = Flask(__name__)
 application.config.from_object(config.DevelopementConfig)
 
-from .models.predict import model_predict as mp
+from models.predict import model_predict as mp
 
 
 @application.route('/predictByUrl', methods=['GET', 'POST'])
