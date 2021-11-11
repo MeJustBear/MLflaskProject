@@ -2,12 +2,12 @@
 
 ## API
 ### Перед началом
-
+Поскольку в проекте используются файлы, сильно превышающие размер в 200МБ, на хосте обязательно должен быть установлен [git lfs](https://git-lfs.github.com/)
 ### Сборка
 Клонируем репозиторий, собираем образ с помощью compose.
 
 ```
-$ git clone https://github.com/MeJustBear/ml-flask-test-task
+$ git lfs clone https://github.com/MeJustBear/ml-flask-test-task
 $ cd cd ml-flask-test-task/
 $ docker-compose up
 ```
@@ -18,8 +18,58 @@ $ docker-compose up
  $ docker run --name my-container -d -p 8080:8080 ml-flask-test-task
 ```
 
-### Функции внутри
+Если ничего не менялось в файле app/config.py, то контейнер запустится на [http://localhost:8000](http://localhost:8000)
 
+### Функции внутри
+Для обращения к функциям классификации, используются POST- и GET-запросы, где в параметрах передаются необходимые данные.
+
+classify_url будет вызвана при обращении к URL: /predictByUrl с помощью POST- или GET-запрса с параметром 'analyseURL'. Вернёт .json-файл, с названиями категорий и вероятностью, с которой текст относится к каждой из них. В случае неправильного обращения(некорректного имени параметра), будет возвращён пустой json.
+```
+@application.route('/predictByUrl', methods=['GET', 'POST'])
+def classify_url():  # put application's code here
+    data = request.form
+    if data:
+        data = data['analyseURL']
+        if data:
+            values = mp.predict_by_url()
+            return jsonify(values)
+        if data:
+            return jsonify({})    
+    else:
+        return jsonify({})
+```
+classify_text будет вызвана при обращении к URL: /predictByUrl с помощью POST-запрса с параметром 'analyseTEXT'. Вернёт .json-файл, с названиями категорий и вероятностью, с которой текст относится к каждой из них. В случае неправильного обращения(некорректного имени параметра), будет возвращён пустой json.
+```
+@application.route('/predictByText', methods=['POST'])
+def classify_text():  # put application's code here
+    data = request.form
+    if data:
+        data = data['analyseTEXT']
+        if data:
+            values = mp.predict_text()
+            return jsonify(values)
+        if data:
+            return jsonify({})    
+    else:
+        return jsonify({}))
+```
+
+Пример такого.json-файла. Для статьи про [новый супергеройский фильм](https://russian.rt.com/nopolitics/article/924183-vechnye-film-marvel)
+
+```
+{
+"Без политики": 50.7047,
+"Бывший СССР": 0.0,
+"Мероприятия RT" 0.0,
+"Мир": 0.0,
+"Наука": 49.2952,
+"Новости партнёров": 0.0,
+"Пресс-релизы": 0.0,
+"Россия": 0.0,
+"Спорт": 0.0,
+"Экономика": 0.0 %
+}
+```
 
 ## Модель
 Перед началом обучения, необходимо "очистить данные". В данном случае, все новые абзаци обозначаются латинской "n" после знака окончания предложения, а также между двумя "n", заключаются цитаты.
@@ -75,6 +125,8 @@ Epoch 9/10
 Epoch 10/10
 1699/1699 [==============================] - 194s 114ms/step - loss: 0.0102 - accuracy: 0.9971 - val_loss: 0.2094 - val_accuracy: 0.9687
 ```
+
+![graph](https://user-images.githubusercontent.com/47248368/141210154-684d5dda-d5fd-4700-88a3-98089de2471b.png)
 
 Параметры полученной нейросети.
 
